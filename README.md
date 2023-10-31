@@ -92,7 +92,7 @@ async function main() {
 main();
 ```
 9. Within the project root, i.e., within Lab2_Part1, run the following command
-to execute the Javascript code in the scripts directory:
+to execute the Javascript code in the scripts directory. Note that we are using the server listening on localhost.
 ```
 npx hardhat run scripts/ListAndTransferBalances.js --network localhost
 ```
