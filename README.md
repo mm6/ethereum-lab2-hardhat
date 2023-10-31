@@ -9,7 +9,7 @@
 The deliverable is a single well labelled pdf file with answers for E.1. through E.11.
 
 ## Part 1. Writing a client side program
-
+```
 npm init     hit return and take the defaults provided
 npm install --save-dev hardhat
 npx hardhat init     select create an empty hardhat config
@@ -43,3 +43,4 @@ getAddressesAndBalances()
 );
 
 npx hardhat run scripts/ListBalances.js --network localhost
+```
