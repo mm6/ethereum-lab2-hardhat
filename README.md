@@ -147,19 +147,23 @@ npm install --save-dev "hardhat@^2.18.2"
 npm install --save-dev @nomicfoundation/hardhat-toolbox
 
 ```
-15. We need access to that toolbox. Edit your hardhat.config.js file and include this line
-at the top:
+15. We need access to that toolbox and establish the correct compiler. Change your
+hardhat.config.js so that it reads as follows:
 
 ```
 require("@nomicfoundation/hardhat-toolbox");
-```
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.5.14",
+};
 
+```
 16. Create a new subdirectory named contracts. Within contracts, create the following smart
-contract named ERCTokenContract.sol:
+contract named MyAdvancedToken.sol:
 
 ```
 
-// =========================== ERC20 Token Contract =================
+// =========================== MyAdvancedToken.sol Contract =================
 
 /* MyAdvancedToken.sol
 
@@ -788,3 +792,28 @@ Note that this command will download the appropriate compiler.
 npx hardhat compile
 
 ```
+
+Now, run the console:
+
+```
+npx hardhat console
+```
+
+const Token = await ethers.getContractFactory("MyAdvancedToken");
+undefined
+
+const token = await Token.deploy(100,"Tok","Tok");
+undefined
+
+token.address
+undefined
+
+token.target
+'0x5FbDB2315678afecb367f032d93F642f64180aa3'
+
+let totalSupply = await token.totalSupply();
+undefined
+
+console.log(totalSupply);
+100000000000000000000n
+undefined
