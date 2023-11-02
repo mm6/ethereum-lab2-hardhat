@@ -147,7 +147,7 @@ npm install --save-dev "hardhat@^2.18.2"
 npm install --save-dev @nomicfoundation/hardhat-toolbox
 
 ```
-15. We need access to that toolbox and establish the correct compiler. Change your
+15. We need access to that toolbox and to establish the correct compiler. Change your
 hardhat.config.js so that it reads as follows:
 
 ```
