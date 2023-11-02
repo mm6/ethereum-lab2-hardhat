@@ -170,75 +170,14 @@ contract named MyAdvancedToken.sol:
    Modified from https://ethereum.org/token.
 
    This contract has instructional documentation.
-
-   Within 2_deploy_migration.js we deploy and call the constructor
-   with 1300 tokens for Alice.
-
-   var aliceToken = artifacts.require("./MyAdvancedToken.sol");
-   module.exports = function(deployer) {
-     deployer.deploy(aliceToken, 1300, "Alice Coin","AC");
-   };
-
-
-   Deploy the contract with Truffle.
-   truffle migrate --reset
-
-   Run truffle console:
-
-   truffle console
-
-
-   Within the console, get access to this contract deployed on Ganache:
-
-   var Web3 = require('web3');
-   var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
-   web3.isConnected()
-   MyAdvancedToken.deployed().then(function(x){ app = x; });
-   app
-
-   To use accounts on Ganache:
-
-   accounts = web3.eth.accounts
-   Alice = accounts[0];
-   Bob = accounts[1];
-   Charlie = accounts[2];
-   Donna = accounts[3];
-
-   etc.
-
-
-   To get the address of the contract into a convenient variable.
-   contract = '0x address from Ganache in quotes'
-
-   To access the balance of account[0] - by default the output is in Wei
-   web3.eth.getBalance(web3.eth.accounts[0]).toNumber();
-
-   To transform this into Ether, use the following:
-
-   web3._extend.utils.fromWei(web3.eth.getBalance(web3.eth.accounts[0]).toNumber(), 'ether')
-
-   An optional note on debugging:
-
-       establish an event
-
-       event Debug(string text, uint value);
-
-       code that works
-
-       Debug('Note this ', uint(addr));
-       return;  // You may not want to continue.
-                // On throw all is reverted and no events are logged.
-       problem code here
 */
-
-
 
 pragma solidity >=0.4.22 <0.6.0;
 
 contract owned {
     // This state variable holds the address of the owner
-    // In truffle:  app.owner().then( n => {c = n})
-    // c.toString()
+    // In a Hardhat script, access with:
+    //
 
     address public owner;
     // The original creator is the first owner.
@@ -261,7 +200,7 @@ contract owned {
     // Establish a new owner.
     // The owner calls with the address of the new owner.
     // Suppose deployer Alice gives ownership to Bob.
-    // In truffle app.transferOwnership(Bob).then( n => {c = n})
+    // In a Hardhat script, do this with:
     function transferOwnership(address newOwner) onlyOwner public {
         owner = newOwner;
     }
@@ -283,9 +222,8 @@ contract TokenERC20 {
     string public symbol;
     uint8 public decimals = 18;
 
-    /* We can read these data from truffle with command such as
-     app.name().then( n => {c = n})
-     c
+    /* We can read these data from a Hardhat script with a command such as
+
     */
 
     // totalSupply established by constructor and increased
@@ -293,9 +231,8 @@ contract TokenERC20 {
 
     uint256 public totalSupply;
 
-    /* To access totalSupply in truffle
-    app.totalSupply().then( n => {c = n})
-    c.toString();
+    /* To access totalSupply in Hardhat do the following:
+
     */
 
     // This creates an array with all balances.
@@ -309,9 +246,8 @@ contract TokenERC20 {
     // If the number of tokens is 1 and we are using 2 decimals
     // then 100 is stored.
 
-    /* To access balanceOf
-    app.balanceOf(Alice).then( n => {c = n})
-    c.toString();
+    /* To access balanceOf in Hardhat do the following:
+
     */
 
     // 0 or more addresses and each has 0 or more addresses each with
@@ -320,16 +256,17 @@ contract TokenERC20 {
 
     mapping (address => mapping (address => uint256)) public allowance;
 
-    // access with truffle. How much has Alice allowed Bob to use?
-
+    // access with Hardhat. How much has Alice allowed Bob to use?
     /*
-     app.allowance(Alice,Bob).then( n => {c = n})
-     c.toString();
+
     */
 
     // This generates a public event on the blockchain that can be
     // used to notify clients.
-    // In truffle, upon receipt of response c, examine c.logs[0].args
+    // In Hardhat,
+    /*
+
+    */
 
     event Transfer(address indexed from, address indexed to, uint256 value);
 
@@ -406,21 +343,7 @@ contract TokenERC20 {
         precondition: The caller has enough tokens to transfer.
         postcondition: The caller's token count is lowered by the passed value.
                        The specified address gains tokens.
-        Called from truffle with:
-        Alice (sending transaction) transfers 50 tokens to Bob
-        app.transfer(Bob,'50000000000000000000').then( n => {c = n})
-        c
-        c is a receipt
-        c.logs shows the Transfer event
-        c.logs[0]
-        c.logs[0].logIndex
-        v = c.logs[0].args.value
-        v.toString()   shows '50000000000000000000'
 
-        Bob transfers 50 tokens to Charlie.
-        Bob's address included in the transaction.
-        Bob pays for this in ether.
-        app.transfer(Charlie,'50000000000000000000',{from:Bob}).then( n => {c = n})
 
     */
 
@@ -439,9 +362,6 @@ contract TokenERC20 {
         sender --> spender ---> amount.
         This generates an Approval event in the receipt log.
         The approve call occurs prior to a transferFrom.
-
-        truffle: Bob approves Charlie to spend 25 tokens.
-        app.approve(Charlie,'25000000000000000000',{from:Bob}).then( n => {c = n})
      */
 
     function approve(address _spender, uint256 _value) public
@@ -464,10 +384,6 @@ contract TokenERC20 {
         Bob pays Charlie from Alice's account. Alice issued a prior approval
         for Bob to spend. Bob initiates the transfer request.
 
-
-        In truffle:
-            Charlie sends 10 of Bob's tokens to Donna.
-            app.transferFrom(Bob,Donna, '10000000000000000000',{from:Charlie}).then( n => {c = n})
     */
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
@@ -493,11 +409,7 @@ contract TokenERC20 {
 
         The approve and call call occurs prior to a transferFrom.
 
-        truffle: Requires another deployed contract and the second deployed
-        contract must have a receiveApproval function.
 
-        Suppose Bob approves a contract to spend 25 tokens.
-        app.approveAndCall(contract,'25000000000000000000',"0x00",{from:Bob}).then( n => {c = n})
      */
 
     function approveAndCall(address _spender, uint256 _value, bytes memory _extraData)
@@ -521,12 +433,6 @@ contract TokenERC20 {
         postcondition: The sender loses tokens and so does totalSupply.
                        A burn event is published.
 
-        truffle: Suppose Bob wants to burn a 1 token
-
-        app.burn('1000000000000000000',{from:Bob}).then( n => {c = n
-        and view the burn event in the logs.
-        c.logs[0].event
-        'Burn'
     */
 
     function burn(uint256 _value) public returns (bool success) {
@@ -555,10 +461,10 @@ contract TokenERC20 {
                        Decrease the totalSuppy of tokens.
                        Publish a Burn event.
 
-        Truffle: Bob wants to burn 3 token of those tokens that he may spend
+        Suppose Bob wants to burn 3 token of those tokens that he may spend
         from Alice's account.
 
-        app.burnFrom(Alice,'3000000000000000000', {from:Bob}).then( n => {c = n})
+        Hardhat:
      */
 
     function burnFrom(address _from, uint256 _value) public returns (bool success) {
@@ -583,18 +489,11 @@ contract MyAdvancedToken is owned, TokenERC20 {
     uint256 public sellPrice;
     uint256 public buyPrice;
 
-    /* In truffle we can view these prices:
-    app.sellPrice({from:Bob}).then(n => { c = n})
-    c.toString()
-    */
-
     // We can freeze and unfreeze accounts
     mapping (address => bool) public frozenAccount;
 
-    /* In truffle we can view the mapping. Is Donna frozen?
-    app.frozenAccount(Donna,{from:Bob}).then(n => { c = n})
-    c.toString()
-    false
+    /* Suppose we want to view the mapping. Is Donna frozen?
+
     */
 
 
@@ -650,17 +549,8 @@ contract MyAdvancedToken is owned, TokenERC20 {
 
     /* Suppose Alice wants to add 5 tokens to Bob's account.
 
-       In truffle:
-       app.mintToken(Bob,'5000000000000000000',{from:Alice}).then(n => { c = n})
-       c
+       In Hardhat:
 
-       c is a receipt
-       c.logs shows two Transfer events
-       c.logs[0]  shows zero address to contract address of 5 tokens
-       c.logs[1]  shows contract address to Bob's address of 5 tokens
-
-       v = c.logs[1].args.value
-       v.toString() shows '5000000000000000000'
     */
 
     function mintToken(address target, uint256 mintedAmount) onlyOwner public {
@@ -680,15 +570,8 @@ contract MyAdvancedToken is owned, TokenERC20 {
     //                A FrozenFunds event is published.
 
     /* Suppose Alice wants to freeze the account of Donna.
-       In truffle:
-       app.freezeAccount(Donna,true,{from:Alice}).then(n => { c = n})
+       In Hardhat:
 
-       c is a receipt
-       c.logs shows one FrozenFunds event.
-       c.logs[0]  shows the specified address and frozen is true.
-
-       v = c.logs[0].args.frozen
-       true
     */
 
     function freezeAccount(address target, bool freeze) onlyOwner public {
@@ -702,9 +585,8 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // It allows the owner to set a sell price and a buy price in eth.
 
     /* Suppose Alice wants to set the sell price at 2 eth and the buy price at 1 eth.
-       In truffle:
+       In Hardhat:
 
-       app.setPrices('2','1',{from:Alice}).then(n => { c = n})
     */
 
     function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner public {
@@ -729,7 +611,8 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // of the contract.
     // contract = '0xDDec5bf035cEf613dc3cb130B0aED7172e04a35d'
     // Second, she might mint 5 tokens for the contract.
-    // app.mintToken(contract,'5000000000000000000',{from:Alice}).then(n => { c = n})
+    // In Hardhat:
+
     // Precondition: The contract must have tokens in its token account.
     //               The caller must have an account with sufficient funds to
     //               cover the cost of gas and the cost of tokens.
@@ -742,8 +625,8 @@ contract MyAdvancedToken is owned, TokenERC20 {
 
     /* Suppose Charlie would like to buy 2 ether worth of tokens from the
      * contract. Suppose the buy price is 4 eth per token.
-     * Truffle:
-     * app.buy({from:Charlie, value:2000000000000000000}).then(n => { c = n})
+     * In Hardhat:
+     *
      * The function will compute amount = 2000000000000000000 / 4 producing the
      * correct amount in the correct format.
     */
@@ -762,9 +645,8 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // The token's ether balance must be >= 1 * 2 = 2.
     // How do we check the contract's ether balance?
 
-    // In truffle:
-    // bal = web3._extend.utils.fromWei(web3.eth.getBalance(contract), 'ether')
-    // bal.toNumber()
+    // In Hardhat:
+    // 
     // Precondition:  The contract has enough ether to buy these tokens
     //                at the sell price.
     // Postconditions:The tokens are added to the contract's account.
