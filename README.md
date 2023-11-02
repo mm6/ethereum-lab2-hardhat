@@ -826,7 +826,7 @@ npx hardhat node
 mkdir scripts
 
 ```
-14. Create a scripts directory and store the file named InteractWithMyAdvancedToken.js within the scripts directory.
+14. Whitin the scripts directory, store the file named InteractWithMyAdvancedToken.js. This file is shown next:
 
 
 ```
