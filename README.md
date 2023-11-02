@@ -800,20 +800,15 @@ npx hardhat console
 ```
 
 const Token = await ethers.getContractFactory("MyAdvancedToken");
-undefined
+
 
 const token = await Token.deploy(100,"Tok","Tok");
-undefined
-
-token.address
-undefined
 
 token.target
 '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
 let totalSupply = await token.totalSupply();
-undefined
+
 
 console.log(totalSupply);
 100000000000000000000n
-undefined
