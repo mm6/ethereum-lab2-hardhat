@@ -107,25 +107,25 @@ npx hardhat run scripts/ListAndTransferBalances.js --network localhost
 mkdir Lab2_Part2
 
 ```
-10. Change directory into the new directory.
+3. Change directory into the new directory.
 
 ```
 cd Lab2_Part2
 ```
-Build a package.json file (holding important information about this project) by running the command:
+Build a package.json file (holding important information about this project) by running the command (hit return and take the defaults provided):
 
 ```
-npm init     hit return and take the defaults provided
+npm init     
 
 ```
 
-11. Now, within the Lab2_Part2 directory, install hardhat:
+4. Now, within the Lab2_Part2 directory, install hardhat:
 
 ```
 npm install --save-dev hardhat
 
 ```
-12. Next, within the Lab2_Part2 directory, initialize Hardhat with the Node Package Execute (npx) command:
+5. Next, within the Lab2_Part2 directory, initialize Hardhat with the Node Package Execute (npx) command:
 
 ```
 npx hardhat init
@@ -133,7 +133,7 @@ npx hardhat init
 
 You will need to select "Create an empty hardhat.config.js".
 
-13. The npx command creates a hardhat.config.js. In addition, if you are asked to do so,
+6. The npx command creates a hardhat.config.js. In addition, if you are asked to do so,
 run the following npm command.
 
 ```
@@ -141,13 +141,13 @@ npm install --save-dev "hardhat@^2.18.2"
 
 ```
 
-14. Within the project directory, install the Hardhat toolbox:
+7. Within the project directory, install the Hardhat toolbox:
 
 ```
 npm install --save-dev @nomicfoundation/hardhat-toolbox
 
 ```
-15. We need access to that toolbox and to establish the correct compiler. Change your
+8. We need access to that toolbox and to establish the correct compiler. Change your
 hardhat.config.js so that it reads as follows:
 
 ```
@@ -158,7 +158,7 @@ module.exports = {
 };
 
 ```
-16. Create a new subdirectory named contracts. Within contracts, create the following smart
+9. Create a new subdirectory named contracts. Within contracts, create the following smart
 contract named MyAdvancedToken.sol:
 
 ```
@@ -783,7 +783,7 @@ contract MyAdvancedToken is owned, TokenERC20 {
 }
 
 ```
-17. Using Node Package Execute (npx), compile the code with the following command. We do
+10. Using Node Package Execute (npx), compile the code with the following command. We do
 this in the directory just above the contracts directory.
 
 Note that this command will download the appropriate compiler.
@@ -797,7 +797,7 @@ Now, run the console:
 
 ```
 npx hardhat console
-```
+
 
 const Token = await ethers.getContractFactory("MyAdvancedToken");
 
@@ -812,3 +812,76 @@ let totalSupply = await token.totalSupply();
 
 console.log(totalSupply);
 100000000000000000000n
+```
+
+11. Leave the console with crtl-D.
+
+12. Start a JSON-RPC server on top of the Hardhat Ethereum Virtual Machine. This
+server is available at https://127.0.0.1:8545.
+```
+npx hardhat node
+```
+13. Leave this server running in its own shell. Open a new shell and change to the directory Lab2_Part2. Within that shell, create a new subdirectory named scripts.
+```
+mkdir scripts
+
+```
+14. Create a scripts directory and store the file named InteractWithMyAdvancedToken.js within the scripts directory.
+
+
+```
+// InteractWithMyAdvancedToken.js.js
+// Define a function to display account addresses and ether balances
+async function getAddressesAndBalances() {
+  // Get signers (accounts with private keys)
+  const signers = await ethers.getSigners();
+  const provider = ethers.provider;
+  // Visit each signer
+  for (const signer of signers) {
+    const address = await signer.getAddress();
+    const balance = await provider.getBalance(address);
+    // Display address and balance
+    console.log("Account address:", address);
+    console.log("Account balance:", balance);
+  }
+}
+// Define a function to perform an ether transfer
+async function performTransfer() {
+  const [Alice,Bob,Carol] = await ethers.getSigners();
+  // Transfer 1 Eth from Alice to Bob
+  await Alice.sendTransaction( {
+    to: Bob.address,
+    value: ethers.parseEther("1.0"),
+  });
+}
+
+// Define the main function to display balances and do some transfers.
+async function main() {
+  try {
+    await getAddressesAndBalances();
+    console.log('getAddressesAndBalances completed');
+
+    await performTransfer();
+    console.log('performTransfer completed');
+
+    await performTransfer();
+    console.log('performTransfer completed a second time');
+
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+// Call the main function
+main();
+```
+
+
+15. Within the project root, i.e., within Lab2_Part2, run the following command
+to execute the Javascript code in the scripts directory. Note that we are using the server listening on localhost.
+
+```
+npx hardhat run scripts/InteractWithMyAdvancedToken.js --network localhost
+
+```
