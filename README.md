@@ -8,6 +8,10 @@
 
 In Part 1, we will work without a smart contract. We will start the Hardhat
 network in its own shell and interact with the shell via a Javascript program.
+Part 1 illustrates a simple, decentralized payment system
+
+In Part 2, we will work with an ERC20 token contract. ERC20 tokens are at the heart
+of many DeFi applications.
 
 ## Part 1. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
@@ -646,7 +650,7 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // How do we check the contract's ether balance?
 
     // In Hardhat:
-    // 
+    //
     // Precondition:  The contract has enough ether to buy these tokens
     //                at the sell price.
     // Postconditions:The tokens are added to the contract's account.
@@ -682,7 +686,6 @@ npx hardhat console
 
 
 const Token = await ethers.getContractFactory("MyAdvancedToken");
-
 
 const token = await Token.deploy(100,"Tok","Tok");
 
