@@ -6,14 +6,14 @@
 
 **Learning Objectives:**
 
-In Part 1, we will work without a smart contract. We will start the Hardhat
+In Part A, we will work without a smart contract. We will start the Hardhat
 network in its own shell and interact with the shell via a Javascript program.
 Part 1 illustrates a simple, decentralized payment system
 
-In Part 2, we will work with an ERC20 token contract. ERC20 tokens are at the heart
+In Part B, we will work with an ERC20 token contract. ERC20 tokens are at the heart
 of many DeFi applications.
 
-## Part 1. Writing a client side program to interact with a Hardhat network running locally in its own shell.
+## Part A. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
 1. In an empty directory named Lab2_Part1, begin by setting up an npm package. Hit return and select the defaults.
 ```
@@ -102,7 +102,7 @@ npx hardhat run scripts/ListAndTransferBalances.js --network localhost
 ```
 
 
-## Part 2. Working with an ERC20 Token contract
+## Part B. Working with an ERC20 Token contract
 
 1. We begin by following the instructions from Lab 1 and repeated here.
 2. Create a new project directory named Lab2_Part2.
@@ -164,6 +164,9 @@ module.exports = {
 ```
 9. Create a new subdirectory named contracts. Within contracts, create the following smart
 contract named MyAdvancedToken.sol:
+
+[Before beginning this part, take some time and study the ERC20 token contract
+ here.](../../blob/master/Lab2PartB/MyAdvancedToken.sol)
 
 ```
 
