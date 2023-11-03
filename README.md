@@ -15,7 +15,7 @@ of many DeFi applications.
 
 ## Part A. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
-1. In an empty directory named Lab2_Part1, begin by setting up an npm package. Hit return and select the defaults.
+1. In an empty directory named Lab2_PartA, begin by setting up an npm package. Hit return and select the defaults.
 ```
 npm init     
 ```
@@ -41,7 +41,7 @@ server is available at https://127.0.0.1:8545.
 ```
 npx hardhat node
 ```
-7. Leave this server running in its own shell. Open a new shell and change to the directory Lab2_Part1. Within that shell, create a new subdirectory named scripts.
+7. Leave this server running in its own shell. Open a new shell and change to the directory Lab2_PartA. Within that shell, create a new subdirectory named scripts.
 ```
 mkdir scripts
 ```
@@ -49,55 +49,7 @@ mkdir scripts
 8. Within the scripts directory [create this Javascript client
 named ListAndTransferBalances.js](../../blob/master/Lab2PartA/ListAndTransferBalances.js).
 
-
-```
-// ListAndTransferBalances.js
-// Define a function to display account addresses and ether balances
-async function getAddressesAndBalances() {
-  // Get signers (accounts with private keys)
-  const signers = await ethers.getSigners();
-  const provider = ethers.provider;
-  // Visit each signer
-  for (const signer of signers) {
-    const address = await signer.getAddress();
-    const balance = await provider.getBalance(address);
-    // Display address and balance
-    console.log("Account address:", address);
-    console.log("Account balance:", balance);
-  }
-}
-// Define a function to perform a transfer
-async function performTransfer() {
-  const [Alice,Bob,Carol] = await ethers.getSigners();
-  // Transfer 1 Eth from Alice to Bob
-  await Alice.sendTransaction( {
-    to: Bob.address,
-    value: ethers.parseEther("1.0"),
-  });
-}
-
-// Define the main function to display balances and do some transfers.
-async function main() {
-  try {
-    await getAddressesAndBalances();
-    console.log('getAddressesAndBalances completed');
-
-    await performTransfer();
-    console.log('performTransfer completed');
-
-    await performTransfer();
-    console.log('performTransfer completed a second time');
-
-    process.exit(0);
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  }
-}
-// Call the main function
-main();
-```
-9. Within the project root, i.e., within Lab2_Part1, run the following command
+9. Within the project root, i.e., within Lab2_PartA, run the following command
 to execute the Javascript code in the scripts directory. Note that we are using the server listening on localhost.
 ```
 npx hardhat run scripts/ListAndTransferBalances.js --network localhost
@@ -107,16 +59,16 @@ npx hardhat run scripts/ListAndTransferBalances.js --network localhost
 ## Part B. Working with an ERC20 Token contract
 
 1. We begin by following the instructions from Lab 1 and repeated here.
-2. Create a new project directory named Lab2_Part2.
+2. Create a new project directory named Lab2_PartB.
 
 ```
-mkdir Lab2_Part2
+mkdir Lab2_PartB
 
 ```
 3. Change directory into the new directory.
 
 ```
-cd Lab2_Part2
+cd Lab2_PartB
 ```
 Build a package.json file (holding important information about this project) by running the command (hit return and take the defaults provided):
 
@@ -125,13 +77,13 @@ npm init
 
 ```
 
-4. Now, within the Lab2_Part2 directory, install hardhat:
+4. Now, within the Lab2_PartB directory, install hardhat:
 
 ```
 npm install --save-dev hardhat
 
 ```
-5. Next, within the Lab2_Part2 directory, initialize Hardhat with the Node Package Execute (npx) command:
+5. Next, within the Lab2_PartB directory, initialize Hardhat with the Node Package Execute (npx) command:
 
 ```
 npx hardhat init
