@@ -46,7 +46,9 @@ npx hardhat node
 mkdir scripts
 ```
 
-8. Within the scripts directory, store the following file under the name "ListAndTransferBalances.js".
+8. Within the scripts directory [create this smart
+contract named ListAndTransferBalances.js](../../blob/master/Lab2PartA/ListAndTransferBalances.js).
+
 
 ```
 // ListAndTransferBalances.js
@@ -162,517 +164,14 @@ module.exports = {
 };
 
 ```
-9. Create a new subdirectory named contracts. Within contracts, create the following smart
-contract named MyAdvancedToken.sol:
+9. Create a new subdirectory named contracts. Within contracts, [create this smart
+contract named MyAdvancedToken.sol](../../blob/master/Lab2PartB/MyAdvancedToken.sol).
 
-[Before beginning this part, take some time and study the ERC20 token contract
- here.](../../blob/master/Lab2PartB/MyAdvancedToken.sol)
+10. It is very important that you take some time to study the contract before continuing. It
+has documentation designed to get you up and running and shows you how to interact with
+the contract using the hardhat console.
 
-```
-
-// =========================== MyAdvancedToken.sol Contract =================
-
-/* MyAdvancedToken.sol
-
-   Modified from https://ethereum.org/token.
-
-   This contract has instructional documentation.
-*/
-
-pragma solidity >=0.4.22 <0.6.0;
-
-contract owned {
-    // This state variable holds the address of the owner
-    // In a Hardhat script, access with:
-    //
-
-    address public owner;
-    // The original creator is the first owner.
-
-    // The constructor is called once on first deployment.
-    constructor() public {
-        owner = msg.sender;
-    }
-
-
-    // Add this modifier to restrict function execution
-    // to only the current owner.
-
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
-
-
-    // Establish a new owner.
-    // The owner calls with the address of the new owner.
-    // Suppose deployer Alice gives ownership to Bob.
-    // In a Hardhat script, do this with:
-    function transferOwnership(address newOwner) onlyOwner public {
-        owner = newOwner;
-    }
-}
-
-
-// This interface may be implemented by another contract on the blockchain.
-// We can call this function in the other contract.
-// We are telling the other contract that it has been approved to
-// withdraw from a particular address up to a particular value.
-// We include the address of this token contract.
-
-interface tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes calldata _extraData) external; }
-
-contract TokenERC20 {
-
-    // Public variables of the token
-    string public name;
-    string public symbol;
-    uint8 public decimals = 18;
-
-    /* We can read these data from a Hardhat script with a command such as
-
-    */
-
-    // totalSupply established by constructor and increased
-    // by mintToken calls
-
-    uint256 public totalSupply;
-
-    /* To access totalSupply in Hardhat do the following:
-
-    */
-
-    // This creates an array with all balances.
-    // Users (Alice, Bob, Charlie) may have balances.
-    // So may the contract itself have a balance.
-    // 0 or more addresses and each has a balance.
-
-    mapping (address => uint256) public balanceOf;
-
-    // The token balances are kept with 10^decimal units.
-    // If the number of tokens is 1 and we are using 2 decimals
-    // then 100 is stored.
-
-    /* To access balanceOf in Hardhat do the following:
-
-    */
-
-    // 0 or more addresses and each has 0 or more addresses each with
-    // an allowance.
-    // The allowance balances are kept with 10^decimal units.
-
-    mapping (address => mapping (address => uint256)) public allowance;
-
-    // access with Hardhat. How much has Alice allowed Bob to use?
-    /*
-
-    */
-
-    // This generates a public event on the blockchain that can be
-    // used to notify clients.
-    // In Hardhat,
-    /*
-
-    */
-
-    event Transfer(address indexed from, address indexed to, uint256 value);
-
-    // This generates a public event on the blockchain that can be
-    // used to notify clients.
-
-    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
-    // This can be used to notify clients of the amount of tokens burned.
-
-    event Burn(address indexed from, uint256 value);
-
-    /**
-     * Constructor function executes once upon deployment.
-     *
-     * Initializes the contract with an initial supply of
-     * tokens and gives them all to the creator of the
-     * contract.
-     */
-
-    constructor(
-        uint256 initialSupply,
-        string memory tokenName,
-        string memory tokenSymbol
-    ) public {
-        // In traditional money, if the initialSupply is 1 dollar then
-        // the value stored would be 1 x 10 ^ 2 = 100 cents.
-        totalSupply = initialSupply * 10 ** uint256(decimals);
-        balanceOf[msg.sender] = totalSupply;
-        name = tokenName;
-        symbol = tokenSymbol;
-    }
-
-
-
-    /**
-     * Internal transfer, only can be called by this contract.
-     * Move tokens from one account to another.
-     * Preconditions are specified in the require statements.
-     */
-
-    function _transfer(address _from, address _to, uint _value) internal {
-        // Prevent transfer to 0x0 address. Use burn() instead
-        require(_to != address(0x0));
-
-        // Check if from has enough
-        require(balanceOf[_from] >= _value);
-
-        // Check for overflows
-        require(balanceOf[_to] + _value > balanceOf[_to]);
-
-        // Save this for an assertion in the future
-        uint previousBalances = balanceOf[_from] + balanceOf[_to];
-
-        // Subtract from the from address
-        balanceOf[_from] -= _value;
-
-        // Add the same to the recipient
-        balanceOf[_to] += _value;
-
-        // Make notification of the transfer
-        emit Transfer(_from, _to, _value);
-
-        // Asserts are used to use static analysis to find bugs in your code.
-        // They should never fail
-        assert(balanceOf[_from] + balanceOf[_to] == previousBalances);
-    }
-
-
-
-     /* Public transfer of tokens.
-        Calls the internal transfer with the message sender as 'from'.
-        The caller transfers its own tokens to the specified address.
-        precondition: The caller has enough tokens to transfer.
-        postcondition: The caller's token count is lowered by the passed value.
-                       The specified address gains tokens.
-
-
-    */
-
-    function transfer(address _to, uint256 _value) public returns (bool success) {
-        _transfer(msg.sender, _to, _value);
-        return true;
-    }
-
-
-
-     /* This is a public approve function.
-        The message sender approves the included address to
-        spend from the sender's account. The upper limit of this approval
-        is also specified.
-        It only modifies the allowance mapping.
-        sender --> spender ---> amount.
-        This generates an Approval event in the receipt log.
-        The approve call occurs prior to a transferFrom.
-     */
-
-    function approve(address _spender, uint256 _value) public
-        returns (bool success) {
-
-        allowance[msg.sender][_spender] = _value;
-        emit Approval(msg.sender, _spender, _value);
-
-        return true;
-    }
-
-
-     /* This is a public transferFrom function.
-        It allows an approved sender to spend from another account.
-        Preconditions: The message sender has been approved by the specified
-        from address. The approval is of enough value.
-
-        Postcondition: Reduce how much more may be spent by this sender.
-        Perform the actual transfer from the 'from' account to the 'to' account.
-        Bob pays Charlie from Alice's account. Alice issued a prior approval
-        for Bob to spend. Bob initiates the transfer request.
-
-    */
-
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        require(_value <= allowance[_from][msg.sender]);     // Check allowance
-        allowance[_from][msg.sender] -= _value;
-        _transfer(_from, _to, _value);
-        return true;
-    }
-
-
-
-     /* This is a public approve and call function.
-        It provides an allowance for another contract and informs
-        that contract of the allowance.
-        The message sender approves the included address (a contract) to
-        spend from the sender's account. The upper limit of this approval
-        is also specified.
-
-        It only modifies the allowance mapping.
-        sender --> contract spender ---> amount.
-        Because of the approve call, this generates an Approval event in
-        the receipt log.
-
-        The approve and call call occurs prior to a transferFrom.
-
-
-     */
-
-    function approveAndCall(address _spender, uint256 _value, bytes memory _extraData)
-        public
-        returns (bool success) {
-
-        tokenRecipient spender = tokenRecipient(_spender);
-        if (approve(_spender, _value)) {
-            spender.receiveApproval(msg.sender, _value, address(this), _extraData);
-            return true;
-        }
-    }
-
-
-
-     /* This is a public burn function.
-        The sender loses tokens and the totalSupply is reduced.
-
-        precondition: The sender must have enough tokens to burn.
-
-        postcondition: The sender loses tokens and so does totalSupply.
-                       A burn event is published.
-
-    */
-
-    function burn(uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value);
-        balanceOf[msg.sender] -= _value;
-        totalSupply -= _value;
-        emit Burn(msg.sender, _value);
-        return true;
-    }
-
-
-     /* This is a public function to burn some tokens that the sender (Bob)
-        has been approved to spend from the approver's (Alice) account.
-
-        Suppose Alice has allowed Bob to spend her tokens.
-        Bob is allowed to burn them if he wants.
-        Suppose he wants to burn 3 of the tokens that Alice has provided.
-        Bob calls burnFrom(Alice,3)
-
-        Precondition:
-                      Alice must have the required number of tokens.
-                      Alice must have approved Bob to use at least that number.
-
-        Postcondition: Deduct tokens from Alice.
-                       Decrease the number of tokens Bob has been approved to spend.
-                       Decrease the totalSuppy of tokens.
-                       Publish a Burn event.
-
-        Suppose Bob wants to burn 3 token of those tokens that he may spend
-        from Alice's account.
-
-        Hardhat:
-     */
-
-    function burnFrom(address _from, uint256 _value) public returns (bool success) {
-        require(balanceOf[_from] >= _value);
-        require(_value <= allowance[_from][msg.sender]);
-        balanceOf[_from] -= _value;
-        allowance[_from][msg.sender] -= _value;
-        totalSupply -= _value;
-        emit Burn(_from, _value);
-        return true;
-    }
-
-}
-
-
-
-// MyAdvancedToken inherits from owned and TokenERC20
-
-contract MyAdvancedToken is owned, TokenERC20 {
-
-    // This contract will buy and sell tokens at these prices
-    uint256 public sellPrice;
-    uint256 public buyPrice;
-
-    // We can freeze and unfreeze accounts
-    mapping (address => bool) public frozenAccount;
-
-    /* Suppose we want to view the mapping. Is Donna frozen?
-
-    */
-
-
-    /* The function freezeAccounts publishes an event on the blockchain
-       that will notify clients of frozen accounts.
-    */
-
-    event FrozenFunds(address target, bool frozen);
-
-
-    // This is a public constructor.
-    // It initializes the contract with an initial supply of tokens
-    // and assigns those tokens to the deployer of the contract.
-    // It also assigns a name and a symbol.
-    // This constructor calls the parent constructor (TokenERC20).
-    // It does nothing else after the call to the TokenERC20 constructor.
-
-    constructor(
-        uint256 initialSupply,
-        string memory tokenName,
-        string memory tokenSymbol
-    ) TokenERC20(initialSupply, tokenName, tokenSymbol) public {}
-
-    /* This is an internal function. It can only be called by this contract.
-       It does not use an implied sender. It simply transfers tokens from
-       one account to another and both accounts are supplied as arguments.
-
-       Preconditions: The recipient may not be the zero address. Use burn instead.
-                      The source must have sufficient funds.
-                      No overflow is permited.
-                      Neither account may be frozen.
-
-       Postconditions: Tokens are transferred.
-                       An event is published.
-    */
-
-    function _transfer(address _from, address _to, uint _value) internal {
-        require (_to != address(0x0));
-        require (balanceOf[_from] >= _value);
-        require (balanceOf[_to] + _value >= balanceOf[_to]);
-        require(!frozenAccount[_from]);
-        require(!frozenAccount[_to]);
-
-        balanceOf[_from] -= _value;
-        balanceOf[_to] += _value;
-        emit Transfer(_from, _to, _value);
-    }
-
-
-    // This function is public but may only be called by the owner
-    // of the contract.
-    // It adds tokens to the supplied address.
-
-    /* Suppose Alice wants to add 5 tokens to Bob's account.
-
-       In Hardhat:
-
-    */
-
-    function mintToken(address target, uint256 mintedAmount) onlyOwner public {
-
-        balanceOf[target] += mintedAmount;
-        totalSupply += mintedAmount;
-
-        emit Transfer(address(0), address(this), mintedAmount);
-        emit Transfer(address(this), target, mintedAmount);
-    }
-
-    // This function is public but may only be called by the owner
-    // of the contract.
-    // The owner may freeze or unfreeze the specified address.
-    // Precondition: Only the owner may call.
-    // Postcondition: The specified account is frozen or unfrozen.
-    //                A FrozenFunds event is published.
-
-    /* Suppose Alice wants to freeze the account of Donna.
-       In Hardhat:
-
-    */
-
-    function freezeAccount(address target, bool freeze) onlyOwner public {
-        frozenAccount[target] = freeze;
-        emit FrozenFunds(target, freeze);
-    }
-
-
-    // This function is public but may only be called by the owner
-    // of the contract.
-    // It allows the owner to set a sell price and a buy price in eth.
-
-    /* Suppose Alice wants to set the sell price at 2 eth and the buy price at 1 eth.
-       In Hardhat:
-
-    */
-
-    function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner public {
-        sellPrice = newSellPrice;
-        buyPrice = newBuyPrice;
-    }
-
-
-
-    // Function buy is public and since it is 'payable' it may be passed ether.
-    // The idea is to send ether to the contract's ether account in
-    // exchange for tokens going into the sender's token account.
-    // The contract will need to have some tokens in its token account
-    // before any buys can succeed.
-    // The ether account (the contract's balance) is maintained by
-    // Ethereum and is not the same as the contract's token account.
-    // The buyPrice is expressed in ether and was established by the owner.
-    // The buyer sends along a value that is expressed in wei.
-    // The contract needs tokens to sell. So, lets assume that prior
-    // to a buy call by Charlie, Alice performed the following two steps.
-    // First, she assigns the variable 'contract' to the address
-    // of the contract.
-    // contract = '0xDDec5bf035cEf613dc3cb130B0aED7172e04a35d'
-    // Second, she might mint 5 tokens for the contract.
-    // In Hardhat:
-
-    // Precondition: The contract must have tokens in its token account.
-    //               The caller must have an account with sufficient funds to
-    //               cover the cost of gas and the cost of tokens.
-    // Postcondition: Tokens are transferred to the caller's token account.
-    //                Ether is placed into the contract's Ether account.
-    //                Miners take some ether based on gas used and the
-    //                price of gas.
-    //                A transfer event is published.
-    //
-
-    /* Suppose Charlie would like to buy 2 ether worth of tokens from the
-     * contract. Suppose the buy price is 4 eth per token.
-     * In Hardhat:
-     *
-     * The function will compute amount = 2000000000000000000 / 4 producing the
-     * correct amount in the correct format.
-    */
-
-    function buy() payable public {
-        uint amount = msg.value / buyPrice;
-        _transfer(address(this), msg.sender, amount);
-    }
-
-    // This is a public function but does not take in ether.
-    // It is not marked as 'payable'. There needs to be ether
-    // in the contract's account for it to be able to buy these
-    // tokens from the caller.
-
-    // Suppose the caller wants to sell 1 token.
-    // The token's ether balance must be >= 1 * 2 = 2.
-    // How do we check the contract's ether balance?
-
-    // In Hardhat:
-    //
-    // Precondition:  The contract has enough ether to buy these tokens
-    //                at the sell price.
-    // Postconditions:The tokens are added to the contract's account.
-    //                Tokens are deducted from sender's account.
-    //                Ether is transferred from contract's ether account
-    //                to sender's ether account.
-
-    function sell(uint256 amount) public {
-        address myAddress = address(this);
-        require(myAddress.balance >= amount * sellPrice);
-        _transfer(msg.sender, address(this), amount);
-
-        // It's important to do this transfer last to avoid recursion attacks.
-        msg.sender.transfer(amount * sellPrice);
-    }
-}
-
-```
-10. Using Node Package Execute (npx), compile the code with the following command. We do
+11. Using Node Package Execute (npx), compile the code with the following command. We do
 this in the directory just above the contracts directory.
 
 Note that this command will download the appropriate compiler.
@@ -682,94 +181,289 @@ npx hardhat compile
 
 ```
 
-Now, run the console:
+12. Now, run the console:
 
 ```
 npx hardhat console
-
-
-const Token = await ethers.getContractFactory("MyAdvancedToken");
-
-const token = await Token.deploy(100,"Tok","Tok");
-
-token.target
-'0x5FbDB2315678afecb367f032d93F642f64180aa3'
-
-let totalSupply = await token.totalSupply();
-
-
-console.log(totalSupply);
-100000000000000000000n
 ```
-
-11. Leave the console with crtl-D.
-
-12. Start a JSON-RPC server on top of the Hardhat Ethereum Virtual Machine. This
-server is available at https://127.0.0.1:8545.
-```
-npx hardhat node
-```
-13. Leave this server running in its own shell. Open a new shell and change to the directory Lab2_Part2. Within that shell, create a new subdirectory named scripts.
-```
-mkdir scripts
-
-```
-14. Whitin the scripts directory, store the file named InteractWithMyAdvancedToken.js. This file is shown next:
+:checkered_flag:**Before beginning, see the checkered flag below that describes how to submit Part B.**
 
 
-```
-// InteractWithMyAdvancedToken.js.js
-// Define a function to display account addresses and ether balances
-async function getAddressesAndBalances() {
-  // Get signers (accounts with private keys)
-  const signers = await ethers.getSigners();
-  const provider = ethers.provider;
-  // Visit each signer
-  for (const signer of signers) {
-    const address = await signer.getAddress();
-    const balance = await provider.getBalance(address);
-    // Display address and balance
-    console.log("Account address:", address);
-    console.log("Account balance:", balance);
-  }
-}
-// Define a function to perform an ether transfer
-async function performTransfer() {
-  const [Alice,Bob,Carol] = await ethers.getSigners();
-  // Transfer 1 Eth from Alice to Bob
-  await Alice.sendTransaction( {
-    to: Bob.address,
-    value: ethers.parseEther("1.0"),
-  });
-}
+ERC20 Token Problems
 
-// Define the main function to display balances and do some transfers.
-async function main() {
-  try {
-    await getAddressesAndBalances();
-    console.log('getAddressesAndBalances completed');
+In the problems below, Alice, Bob, Charlie, Donna and Emily are associated
+with the first five accounts provided in Hardhat. Each begins with 10,000 ether in his or her account.
+Use ethers.getSigners(); to establish these names to accounts.
 
-    await performTransfer();
-    console.log('performTransfer completed');
+0. Alice has deployed an instance of the MyAdvancedToken contract to
+ the blockchain. She gave it the name "Alice Coin" and the symbol AC and an initial
+ supply of 1300 tokens.
+ Show command(s), that when executed in the Hardhat console, display the number of tokens (Alice Coins) held in her account. For this question you are required to call the balanceOf() method on the contract.
 
-    await performTransfer();
-    console.log('performTransfer completed a second time');
+1. Show the command(s), that when executed in the Hardhat console, display the total supply of tokens. For this question you are required to access the totalSupply public variable.
 
-    process.exit(0);
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  }
-}
-// Call the main function
-main();
-```
+2. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance. Note: this is not her token balance.
 
 
-15. Within the project root, i.e., within Lab2_Part2, run the following command
-to execute the Javascript code in the scripts directory. Note that we are using the server listening on localhost.
+3. Alice allows Bob to spend 100 tokens on her behalf. Show the
+ Hardhat console command(s) and the transaction receipt.
+ Also, show Alice's Ethereum balance after she runs the transaction.
 
-```
-npx hardhat run scripts/InteractWithMyAdvancedToken.js --network localhost
+4. Step number 3 should have generated an event on Ganache. Show the three values of _owner, _spender, and _value that are available under the Events tab.
 
-```
+5. Alice allows Charlie to spend 50 tokens on her behalf. Show the
+ Hardhat console command(s) and the transaction receipt.
+
+6. Show the command(s), that when executed in the Hardhat console, display the number of tokens that Alice has in her account. Use the balanceOf() method.
+
+7. Bob sends 50 of Alice's tokens to Donna. Show the Hardhat console command(s) and the transaction receipt.
+ Also, show Bob's Ethereum balance (not tokens) after he runs the transaction.
+
+
+8. Charlie sends 20 of Alice's tokens to Emily and burns the remaining tokens that Alice provided to Charlie. Show the Hardhat console command(s) and the transaction receipts.
+
+
+9. Show the command(s) needed to access the totalSupply variable and show the number of tokens remaining.
+
+10. Emily sends 5 of her tokens to Bob. Paste here the
+ Hardhat console command(s) and the transaction receipt.
+ Also, show Bob's token balance after Emily runs the transaction.
+
+
+11. Bob sends his 5 tokens to Alice. Paste here the
+ Hardhat console command(s) and the transaction receipt.
+
+
+
+12. Bob returns his remaining allowance to Alice. Show the
+ Hardhat console command(s) and the transaction receipt.
+ Also, show Bob's token balance after he runs the transaction.
+
+
+13. Bob attempts to send 10 tokens to Donna. Show the
+ Hardhat console command(s) and the transaction receipt or any errors
+ that may occur.
+
+
+
+14. Alice sends 100 tokens to the contract without increasing
+ the totalSupply. She also sets the buy price to 1 ether and the
+ sell price to 2 ether. Paste here the Hardhat console commands and the transaction receipts.
+
+
+15. Show the command(s) to find and display the contract's ether balance (not the token balance).
+Also, show the ether balance.
+
+
+16. Donna buys 50 ether worth of tokens. Show the
+ Hardhat console command(s) and the transaction receipt.
+
+
+17. Donna no longer enjoys her tokens and wants to sell as many as she can back to the contract. Show the command she uses to sell her tokens and show the returned receipt.
+
+
+18. Alice wants to have her contract "live free". So, she turns over control of the contract to the contract itself. Show the command she uses to free her contract and show the returned receipt.
+
+19. Alice decides that she wants to mint 5 additional tokens and give them to Bob (increasing the total supply of tokens by 5). Show the command that she would try to use and show any error that may result.
+
+
+20. Find the token balance of each of our players:
+
+    Alice _________
+
+    Bob   _________
+
+    Charlie _______
+
+    Donna _________
+
+    Emily _________
+
+    contract ______
+
+
+21. What is the ether balance of
+ each of our players:
+
+    Alice _________
+
+    Bob   _________
+
+    Charlie _______
+
+    Donna _________
+
+    Emily _________
+
+    contract ______    
+
+:checkered_flag:**To receive credit for Part B, submit your answers to the 22 questions above in a file named Lab2PartB.doc or Lab2PartB.pdf. Each answer will be clearly labelled with the question number (0 through 21).**
+
+## Part C. Remix deployment and interaction with an ERC20 Token 5 Points
+
+
+In this Part, you will deploy the same MyAdvancedToken contract to Remix.
+
+Once deployed, you will need to answer the following questions by using
+Remix. Paste your solutions into Lab2PartC.doc or Lab2PartC.pdf.
+
+
+Remix Problems
+:
+
+
+In the problems below, Alice, Bob, Charlie, Donna and Emily are associated
+with the five accounts as above.  Each has 10,0000 ether in their accounts.
+
+0. Alice deploys an instance of the MyAdvancedToken contract to
+ Remix. She gives it the name "Alice Coin" and the symbol "AC" and an initial supply of 1300 tokens.  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Alice's address.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt returned to the browser.
+
+
+1. Alice allows Bob to spend 100 tokens on her behalf.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Bob's address.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs returned to the browser.
+
+2. Alice allows Charlie to spend 50 tokens on her behalf.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Charlie's address.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
+
+3. Bob sends 50 of Alice's tokens to Donna.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Donna's address.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
+
+
+4. Charlie sends 20 of Alice's tokens to Emily and burns the
+ remaining tokens that Alice provided to Charlie.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Emily's address.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the first transaction receipt logs.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the second transaction receipt logs.
+
+
+5. Emily sends 5 of her tokens to Bob.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
+
+
+
+6. Bob sends his 5 tokens to Alice.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
+
+
+7. Bob returns his remaining allowance to Alice.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
+
+
+8. Bob attempts to send 10 tokens to Donna.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the error message.
+
+
+
+9. Alice sends 100 tokens to the contract without increasing
+ the totalSupply. She also sets the buy price to 1 ether and the
+ sell price to 2 ether.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the first transaction receipt logs.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the second transaction receipt logs.
+
+
+10. Donna buys 50 ether worth of tokens.
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
+
+
+11. Find the token balance of each of our players:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alice
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bob
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charlie
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Donna
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emily  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contract  
+
+
+12. What is the ether balance (to two decimal digits) for:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alice
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bob
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charlie
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Donna
+
+13. Alice turns control of the contract to the contract itself. What is
+the transaction hash?
+
+
+14. What is the Elliptic curve private key of Alice?
+
+
+15. Public key cryptography often uses digital certificates. However,
+in this lab, we have made no use of digital certificates. Explain why. In your answer,
+be sure to say what digital certificates are normally used for and then explain why we do not
+need them here. (This requires a little research.)
+
+
+:checkered_flag:**To receive credit for Part C, submit your answers to the 16 questions above in a file named Lab2PartC.doc or Lab2PartC.pdf. Each answer will be clearly labelled with the question number (0 through 15). Each answer will be nicely formatted and easy to read.**
+
+
+:checkered_flag:**Place your three submission documents (Lab2PartA.doc or Lab2PartA.pdf and Lab2PartB.doc or Lab2PartB.pdf and Lab2PartC.doc or Lab2PartC.pdf) into a single directory and zip that directory. Name the zip file <your-andrew-id>Lab2.zip. Submit this single zip file to Canvas.**
+
+
+## Grading rubric for the materials in the submission directory
+One zip file named Lab2.zip will be submitted on Canvas for grading.
+
++ 4 points for successful completion of Part A
++ 1 point for correct submission and clear labelings of Part A
++ 9 points for successful completion of Part B
++ 1 point for correct submission and clear labelings of Part B
++ 4 points for successful completion of Part C
++ 1 point for correct submission and clear labelings of Part C
+
+Penalty for any late  work
+==========================
++ -1 point per day late
