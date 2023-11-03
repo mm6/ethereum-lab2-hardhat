@@ -46,8 +46,8 @@ npx hardhat node
 mkdir scripts
 ```
 
-8. Within the scripts directory [create this smart
-contract named ListAndTransferBalances.js](../../blob/master/Lab2PartA/ListAndTransferBalances.js).
+8. Within the scripts directory [create this Javascript client
+named ListAndTransferBalances.js](../../blob/master/Lab2PartA/ListAndTransferBalances.js).
 
 
 ```
