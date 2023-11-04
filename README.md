@@ -15,7 +15,7 @@ of many DeFi applications.
 
 **Deliverable:**
 
-On a single and well labelled pdf file named Lab2.pdf, include your answers to E0 through E XX. Submit the single and well labelled pdf to Canvas.
+Please compile your answers to questions E0 through EXX into a single PDF file named ‘Lab2.pdf’. Ensure that the file is well-organized and properly labeled. Submit this single PDF file to Canvas.
 
 ## Part A. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
