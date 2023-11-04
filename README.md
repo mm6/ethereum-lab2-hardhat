@@ -15,8 +15,7 @@ of many DeFi applications.
 
 **Deliverable:**
 
-On a single and well labelled pdf file, include your answers to E0 through E XX. Submit the single and well
-labelled pdf to Canvas.
+On a single and well labelled pdf file named Lab2.pdf, include your answers to E0 through E XX. Submit the single and well labelled pdf to Canvas.
 
 ## Part A. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
@@ -88,7 +87,7 @@ program and then run ShowFirstThreeBalances.js. In your single, well labeled pdf
 
 ## Part B. Working with an ERC20 Token contract
 
-1. We begin by following the instructions from Lab 1 and repeated here.
+1. We begin by following the instructions from Lab 1 as repeated here.
 2. Create a new project directory named Lab2_PartB.
 
 ```
@@ -168,8 +167,6 @@ npx hardhat compile
 ```
 npx hardhat console
 ```
-:checkered_flag:**Before beginning, see the checkered flag below that describes how to submit Part B.**
-
 
 ERC20 Token Problems
 
@@ -177,7 +174,7 @@ In the problems below, Alice, Bob, Charlie, Donna and Emily are associated
 with the first five accounts provided in Hardhat. Each begins with 10,000 ether in his or her account.
 Use ethers.getSigners(); to establish these names to accounts.
 
-0. Alice has deployed an instance of the MyAdvancedToken contract to
+E7.  Alice has deployed an instance of the MyAdvancedToken contract to
  the blockchain. She gave it the name "Alice Coin" and the symbol AC and an initial
  supply of 1300 tokens.
  Show command(s), that when executed in the Hardhat console, display the number of tokens (Alice Coins) held in her account. For this question you are required to call the balanceOf() method on the contract.
@@ -279,7 +276,7 @@ Also, show the ether balance.
 
     contract ______    
 
-:checkered_flag:**To receive credit for Part B, submit your answers to the 22 questions above in a file named Lab2PartB.pdf. Each answer will be clearly labelled with the question number (0 through 21).**
+
 
 ## Part C. Remix deployment and interaction with an ERC20 Token 5 Points
 
