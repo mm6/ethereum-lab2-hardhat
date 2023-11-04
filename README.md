@@ -202,10 +202,9 @@ E13. Show the command(s), that when executed in the Hardhat console, display the
 E14. Bob sends 50 of Alice's tokens to Donna. Show the Hardhat console command(s) and the transaction receipt. Also, show Alice's token balance (not eth) after he runs the transaction.
 
 
-E15. Charlie sends 20 of Alice's tokens to Emily and burns the remaining tokens that Alice provided to Charlie. Show the Hardhat console command(s) and the transaction receipts.
+E15. Charlie sends 20 of Alice's tokens to Emily.  Show the Hardhat console command(s) and the transaction receipt. In addition, show Alice's token balance (not eth) after he runs the transaction.
 
-
-E16. Show the command(s) needed to access the totalSupply variable and show the number of tokens remaining.
+E16. Charlie burns the remaining tokens that he received from Alice. Show the Hardhat console command(s) and the transaction receipt. In addition, since Charlie has burned tokens, show the total supply of tokens that still remain in the contract.
 
 E17. Emily sends 5 of her tokens to Bob. Paste here the
  Hardhat console command(s) and the transaction receipt.
