@@ -1,4 +1,5 @@
 
+
 // =========================== MyAdvancedToken.sol Contract =================
 
 /* MyAdvancedToken.sol
@@ -10,9 +11,8 @@
    To run the Hardhat console, use:
    npx hardhat console
 
-   In the console, get access to ethers library:
+   Get access to ethers library
    const { ethers } = require("hardhat");
-   The response will be 'undefined'.
 
    Suppose that we want to
    deploy MyAdvancedToken.sol and call the constructor
@@ -23,7 +23,7 @@
    const token = await Token.deploy(1300,"Alice Coin","AC");
 
    To access accounts from within the Hardhat console:
-   const [Alice, Bob, Charlie, Donna, Emily] = await ethers.getSigners();
+   const [Alice, Bob, Charlie, Donna] = await ethers.getSigners();
 
    Get the account address of Alice within a convenient variable:
    const aliceAddr = Alice.address;
@@ -44,8 +44,17 @@
    wei = ethers.parseEther("1.0")
    1000000000000000000n
 
-   Create a string holding eth given wei as a BigInt.
+   Create an string holding eth given wei as a BigInt.
    ethString = ethers.formatEther(wei)
+
+   Note on transactions:
+   When we execute a transaction, we get back a transaction object that
+   contains a transaction hash and other details. But, the transaction is not
+   yet confirmed. It has simply been seen by the network. If we are interested
+   in the transaction receipt (after it has been confirmed), we would execute:
+   receipt = await tx.wait(). For an example, see the documentation around the
+   burn() function below.
+
 
 */
 
@@ -258,7 +267,7 @@ contract TokenERC20 {
 
      /* This is a public approve function.
         The message sender approves the included address to
-        spend from the sender's account. The upper limit of this approval
+        spend tokens from the sender's account. The upper limit of this approval
         is also specified.
         It only modifies the allowance mapping.
         sender --> spender ---> amount.
@@ -350,10 +359,12 @@ contract TokenERC20 {
 
         Hardhat: Suppose Alice wants to burn 1 token and view the event.
 
-        tx = await token.burn('1000000000000000000')
+        // Send a burn request to the network and get a response when submitted.
+        tx = await token.burn('1000000000000000000');
+        // Wait for the transaction to be confirmed and get back a receipt.
         const receipt = await tx.wait()
+        // Display the logs array and view events that may have been triggered.
         console.log(receipt.logs)
-
 
     */
 
@@ -371,8 +382,6 @@ contract TokenERC20 {
 
         Suppose Alice has allowed Bob to spend her tokens.
         Bob is allowed to burn them if he wants.
-        Suppose he wants to burn 3 of the tokens that Alice has provided.
-        Bob calls burnFrom(Alice,3)
 
         Precondition:
                       Alice must have the required number of tokens.
@@ -383,7 +392,7 @@ contract TokenERC20 {
                        Decrease the totalSuppy of tokens.
                        Publish a Burn event.
 
-        Suppose Bob wants to burn 3 token of those tokens that he may spend
+        Suppose Bob wants to burn 3 of the tokens that he may spend
         from Alice's account.
 
         Hardhat:
