@@ -32,12 +32,11 @@ npx hardhat init
 ```
 npm install --save-dev @nomicfoundation/hardhat-toolbox
 ```
-5. We need to refer to these tools in the config.js file. At top of config.js, put the following line:
+5. We need to refer to these tools in the config.js file. At top of hardhat.config.js, put the following line:
 ```
 require("@nomicfoundation/hardhat-toolbox");
 ```
-6. Start a JSON-RPC server on top of the Hardhat Ethereum Virtual Machine. This
-server is available at https://127.0.0.1:8545.
+6. Within the directory Lab2_PartA, start a JSON-RPC server on top of the Hardhat Ethereum Virtual Machine. After startup, this server will become available at https://127.0.0.1:8545.
 ```
 npx hardhat node
 ```
