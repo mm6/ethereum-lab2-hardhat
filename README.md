@@ -65,8 +65,12 @@ single, well labeled pdf file.
 
 E3. Do the two transactions have the same transaction hash or are they different? Answer this question and copy and paste the two transaction hashes into your single, well labeled pdf file.
 
-E4. Write a JavaScript program named ShowFirstThreeBalances.js. Place this program in the scripts directory. Run this program in its own command shell. In your single, well labeled pdf file, show the program itself
-as well as the output generated.
+E4. Using ListAndTransferBalances.js as a guide, write a new JavaScript program named ShowFirstThreeBalances.js. The program needs to be clean and well documented. Place this program in the scripts directory. Run this program in its own command shell. In your single, well labeled pdf file, show the program itself as well as the output generated. We will name the players Alice, Bob, and Carol. Your output will appear as follows:
+
+Alice balance: ALICE BALANCE HERE
+Bob balance: BOB BALANCE HERE
+Carol balance: CAROL BALANCE HERE
+
 
 ## Part B. Working with an ERC20 Token contract
 
