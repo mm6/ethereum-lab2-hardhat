@@ -60,7 +60,7 @@ transactions into your single, well labeled pdf file.
 E1. How much gas was used by each transaction. Copy and paste your answer into your
 single, well labeled pdf file.
 
-E2. How many transactions are being placed into a block. Copy and paste your answer into your
+E2. How many transactions are being placed into each block. Copy and paste your answer into your
 single, well labeled pdf file.
 
 E3. Do the two transactions have the same transaction hash or are they different? Copy and paste
