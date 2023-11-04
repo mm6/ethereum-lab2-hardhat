@@ -10,8 +10,9 @@
    To run the Hardhat console, use:
    npx hardhat console
 
-   Get access to ethers library
+   In the console, get access to ethers library:
    const { ethers } = require("hardhat");
+   The response will be 'undefined'.
 
    Suppose that we want to
    deploy MyAdvancedToken.sol and call the constructor
@@ -22,7 +23,7 @@
    const token = await Token.deploy(1300,"Alice Coin","AC");
 
    To access accounts from within the Hardhat console:
-   const [Alice, Bob, Charlie, Donna] = await ethers.getSigners();
+   const [Alice, Bob, Charlie, Donna, Emily] = await ethers.getSigners();
 
    Get the account address of Alice within a convenient variable:
    const aliceAddr = Alice.address;
@@ -43,7 +44,7 @@
    wei = ethers.parseEther("1.0")
    1000000000000000000n
 
-   Create an string holding eth given wei as a BigInt.
+   Create a string holding eth given wei as a BigInt.
    ethString = ethers.formatEther(wei)
 
 */

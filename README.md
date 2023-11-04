@@ -181,7 +181,7 @@ E7.  Alice has deployed an instance of the MyAdvancedToken contract to
 
 E8. Show the command(s), that when executed in the Hardhat console, display the total supply of tokens. For this question you are required to access the totalSupply public variable.
 
-E9. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance. Note: this is not her token balance.
+E9. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance in wei and in eth. Note: this is not her token balance. We are looking for two answers here. One showing wei and one showing eth.
 
 
 E10. Alice allows Bob to spend 100 tokens on her behalf. Show the
