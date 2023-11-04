@@ -179,74 +179,67 @@ E7.  Alice has deployed an instance of the MyAdvancedToken contract to
  supply of 1300 tokens.
  Show command(s), that when executed in the Hardhat console, display the number of tokens (Alice Coins) held in her account. For this question you are required to call the balanceOf() method on the contract.
 
-1. Show the command(s), that when executed in the Hardhat console, display the total supply of tokens. For this question you are required to access the totalSupply public variable.
+E8. Show the command(s), that when executed in the Hardhat console, display the total supply of tokens. For this question you are required to access the totalSupply public variable.
 
-2. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance. Note: this is not her token balance.
+E9. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance. Note: this is not her token balance.
 
 
-3. Alice allows Bob to spend 100 tokens on her behalf. Show the
+E10. Alice allows Bob to spend 100 tokens on her behalf. Show the
  Hardhat console command(s) and the transaction receipt.
  Also, show Alice's Ethereum balance after she runs the transaction.
 
-4. Step number 3 should have generated an event on Ganache. Show the three values of _owner, _spender, and _value that are available under the Events tab.
+E11. Step number 3 should have generated an event. Show the three values of _owner, _spender, and _value that are available.
 
-5. Alice allows Charlie to spend 50 tokens on her behalf. Show the
+E12. Alice allows Charlie to spend 50 tokens on her behalf. Show the
  Hardhat console command(s) and the transaction receipt.
 
-6. Show the command(s), that when executed in the Hardhat console, display the number of tokens that Alice has in her account. Use the balanceOf() method.
+E13. Show the command(s), that when executed in the Hardhat console, display the number of tokens that Alice has in her account. Use the balanceOf() method.
 
-7. Bob sends 50 of Alice's tokens to Donna. Show the Hardhat console command(s) and the transaction receipt.
- Also, show Bob's Ethereum balance (not tokens) after he runs the transaction.
-
-
-8. Charlie sends 20 of Alice's tokens to Emily and burns the remaining tokens that Alice provided to Charlie. Show the Hardhat console command(s) and the transaction receipts.
+E14. Bob sends 50 of Alice's tokens to Donna. Show the Hardhat console command(s) and the transaction receipt. Also, show Bob's Ethereum balance (not tokens) after he runs the transaction.
 
 
-9. Show the command(s) needed to access the totalSupply variable and show the number of tokens remaining.
+E15. Charlie sends 20 of Alice's tokens to Emily and burns the remaining tokens that Alice provided to Charlie. Show the Hardhat console command(s) and the transaction receipts.
 
-10. Emily sends 5 of her tokens to Bob. Paste here the
+
+E16. Show the command(s) needed to access the totalSupply variable and show the number of tokens remaining.
+
+E17. Emily sends 5 of her tokens to Bob. Paste here the
  Hardhat console command(s) and the transaction receipt.
  Also, show Bob's token balance after Emily runs the transaction.
 
 
-11. Bob sends his 5 tokens to Alice. Paste here the
+E18. Bob sends his 5 tokens to Alice. Paste here the
  Hardhat console command(s) and the transaction receipt.
 
 
-
-12. Bob returns his remaining allowance to Alice. Show the
+E19. Bob returns his remaining allowance to Alice. Show the
  Hardhat console command(s) and the transaction receipt.
  Also, show Bob's token balance after he runs the transaction.
 
 
-13. Bob attempts to send 10 tokens to Donna. Show the
+E20. Bob attempts to send 10 tokens to Donna. Show the
  Hardhat console command(s) and the transaction receipt or any errors
  that may occur.
 
 
-
-14. Alice sends 100 tokens to the contract without increasing
+E21. Alice sends 100 tokens to the contract without increasing
  the totalSupply. She also sets the buy price to 1 ether and the
  sell price to 2 ether. Paste here the Hardhat console commands and the transaction receipts.
 
-
-15. Show the command(s) to find and display the contract's ether balance (not the token balance).
+E22. Show the command(s) to find and display the contract's ether balance (not the token balance).
 Also, show the ether balance.
 
-
-16. Donna buys 50 ether worth of tokens. Show the
+E23. Donna buys 50 ether worth of tokens. Show the
  Hardhat console command(s) and the transaction receipt.
 
+E24. Donna no longer enjoys her tokens and wants to sell as many as she can back to the contract. Show the command she uses to sell her tokens and show the returned receipt.
 
-17. Donna no longer enjoys her tokens and wants to sell as many as she can back to the contract. Show the command she uses to sell her tokens and show the returned receipt.
+E25. Alice wants to have her contract "live free". So, she turns over control of the contract to the contract itself. Show the command she uses to free her contract and show the returned receipt.
 
-
-18. Alice wants to have her contract "live free". So, she turns over control of the contract to the contract itself. Show the command she uses to free her contract and show the returned receipt.
-
-19. Alice decides that she wants to mint 5 additional tokens and give them to Bob (increasing the total supply of tokens by 5). Show the command that she would try to use and show any error that may result.
+E26. Alice decides that she wants to mint 5 additional tokens and give them to Bob (increasing the total supply of tokens by 5). Show the command that she would try to use and show any error that may result.
 
 
-20. Find the token balance of each of our players:
+E27. Find the token balance of each of our players:
 
     Alice _________
 
@@ -261,8 +254,7 @@ Also, show the ether balance.
     contract ______
 
 
-21. What is the ether balance of
- each of our players:
+E28. What is the ether balance of each of our players:
 
     Alice _________
 
