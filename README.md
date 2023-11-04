@@ -8,7 +8,7 @@
 
 In Part A, we will work without a smart contract. We will start the Hardhat
 network in its own shell and interact with the shell via a Javascript program.
-Part 1 illustrates a simple, decentralized payment system
+Part 1 illustrates client server computing and a simple decentralized payment system.
 
 In Part B, we will work with an ERC20 token contract. ERC20 tokens are at the heart
 of many DeFi applications.
