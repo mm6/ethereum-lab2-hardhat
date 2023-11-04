@@ -184,11 +184,9 @@ E8. Show the command(s), that when executed in the Hardhat console, display the 
 E9. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance in wei and in eth. Note: this is not her token balance. We are looking for two answers here. One showing wei and one showing eth.
 
 
-E10. Alice allows Bob to spend 100 tokens on her behalf. Show the
- Hardhat console command(s) and the transaction receipt.
- Also, show Alice's Ethereum balance after she runs the transaction.
+E10. Alice allows Bob to spend 100 tokens on her behalf. Show the Hardhat console command(s) and the transaction receipt. Also, show Alice's Ethereum balance (in eth) after she runs the transaction. Note, to view the transaction receipt, you will want to study the contract documentation on the burn function.
 
-E11. Step number 3 should have generated an event. Show the three values of _owner, _spender, and _value that are available.
+E11. Excercise E10 should have generated an event. Show the three values of _owner, _spender, and _value that are available.
 
 E12. Alice allows Charlie to spend 50 tokens on her behalf. Show the
  Hardhat console command(s) and the transaction receipt.
