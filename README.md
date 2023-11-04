@@ -63,8 +63,7 @@ single, well labeled pdf file.
 E2. How many transactions are being placed into each block. Copy and paste your answer into your
 single, well labeled pdf file.
 
-E3. Do the two transactions have the same transaction hash or are they different? Copy and paste
-the two transaction hashes into your single, well labeled pdf file.
+E3. Do the two transactions have the same transaction hash or are they different? Answer this question and copy and paste the two transaction hashes into your single, well labeled pdf file.
 
 E4. Write a JavaScript program named ShowFirstThreeBalances.js. Place this program in the scripts directory. Run this program in its own command shell. In your single, well labeled pdf file, show the program itself
 as well as the output generated.
