@@ -245,16 +245,16 @@ contract TokenERC20 {
                        The specified address gains tokens.
 
         Suppose Alice wants to transfer 50 tokens to Bob. Using Hardhat we write:
-        let c = await token.transfer(bobAddr,'50000000000000000000');
-
-        c is the receipt. One field is the signature. Another is the hash of this transaction.
-        c.signature is the signature of the sender
-        c.hash is the transaction hash
+        tx = await token.transfer(bobAddr,'50000000000000000000');
+        receipt = await tx.wait();
+        receipt.logs[0] is often interesting.
 
         If we want another player (other than Alice) to do a transfer, use this
         syntax in Hardhat (note: Bob is not a simple address but a signer. See above.)
 
-        await token.connect(Bob).transfer(charlieAddr, '50000000000000000000');
+        tx = await token.connect(Bob).transfer(charlieAddr, '50000000000000000000');
+        receipt = await tx.wait();
+        receipt.logs[0] is often interesting.
 
     */
 
