@@ -249,7 +249,7 @@ Also, show the ether balance.
 
     contract ______    
 
-:checkered_flag:**To receive credit for Part B, submit your answers to the 22 questions above in a file named Lab2PartB.doc or Lab2PartB.pdf. Each answer will be clearly labelled with the question number (0 through 21).**
+:checkered_flag:**To receive credit for Part B, submit your answers to the 22 questions above in a file named Lab2PartB.pdf. Each answer will be clearly labelled with the question number (0 through 21).**
 
 ## Part C. Remix deployment and interaction with an ERC20 Token 5 Points
 
@@ -257,7 +257,7 @@ Also, show the ether balance.
 In this Part, you will deploy the same MyAdvancedToken contract to Remix.
 
 Once deployed, you will need to answer the following questions by using
-Remix. Paste your solutions into Lab2PartC.doc or Lab2PartC.pdf.
+Remix. Paste your solutions into Lab2PartC.pdf.
 
 
 Remix Problems
@@ -400,10 +400,10 @@ be sure to say what digital certificates are normally used for and then explain 
 need them here. (This requires a little research.)
 
 
-:checkered_flag:**To receive credit for Part C, submit your answers to the 16 questions above in a file named Lab2PartC.doc or Lab2PartC.pdf. Each answer will be clearly labelled with the question number (0 through 15). Each answer will be nicely formatted and easy to read.**
+:checkered_flag:**To receive credit for Part C, submit your answers to the 16 questions above in a file named Lab2PartC.pdf. Each answer will be clearly labelled with the question number (0 through 15). Each answer will be nicely formatted and easy to read.**
 
 
-:checkered_flag:**Place your three submission documents (Lab2PartA.doc or Lab2PartA.pdf and Lab2PartB.doc or Lab2PartB.pdf and Lab2PartC.doc or Lab2PartC.pdf) into a single directory and zip that directory. Name the zip file <your-andrew-id>Lab2.zip. Submit this single zip file to Canvas.**
+:checkered_flag:**Place your three submission documents (Lab2PartA.pdf and Lab2PartB.pdf and Lab2PartC.pdf) into a single directory and zip that directory. Name the zip file <your-andrew-id>Lab2.zip. Submit this single zip file to Canvas.**
 
 
 ## Grading rubric for the materials in the submission directory
