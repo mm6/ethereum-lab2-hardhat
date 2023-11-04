@@ -11,7 +11,7 @@
    To run the Hardhat console, use:
    npx hardhat console
 
-   Get access to ethers library
+   On startup, get access to ethers library:
    const { ethers } = require("hardhat");
 
    Suppose that we want to
