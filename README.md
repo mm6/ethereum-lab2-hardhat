@@ -15,7 +15,7 @@ of many DeFi applications.
 
 ## Part A. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
-1. In an empty directory named Lab2_PartA, begin by setting up an npm package. Hit return and select the defaults.
+1. In an empty directory named Lab2_PartA, begin by setting up an npm package. When prompted, hit return and select the defaults.
 ```
 npm init     
 ```
