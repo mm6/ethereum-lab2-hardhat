@@ -168,6 +168,11 @@ npx hardhat compile
 npx hardhat console
 ```
 
+13. For the ERC problems, it is highly recommended that you make a copy of each command
+before executing it. In this way, if you make a mistake, it is a simple matter to replay
+the old commands - with copy and paste.
+
+
 ERC20 Token Problems
 
 In the problems below, Alice, Bob, Charlie, Donna and Emily are associated
