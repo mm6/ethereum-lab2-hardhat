@@ -36,7 +36,7 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox
 ```
 require("@nomicfoundation/hardhat-toolbox");
 ```
-6. Within the directory Lab2_PartA, start a JSON-RPC server on top of the Hardhat Ethereum Virtual Machine. After startup, this server will become available at https://127.0.0.1:8545.
+6. Within the directory Lab2_PartA, start a JSON-RPC server that will run on top of the Hardhat Ethereum Virtual Machine. After startup, this server will become available at https://127.0.0.1:8545.
 ```
 npx hardhat node
 ```
