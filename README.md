@@ -54,6 +54,20 @@ to execute the Javascript code in the scripts directory. Note that we are using 
 npx hardhat run scripts/ListAndTransferBalances.js --network localhost
 ```
 
+E0. Your server side console should show two transactions. Copy and paste these two
+transactions into your single, well labeled pdf file.
+
+E1. How much gas was used by each transaction. Copy and paste your answer into your
+single, well labeled pdf file.
+
+E2. How many transactions are being placed into a block. Copy and paste your answer into your
+single, well labeled pdf file.
+
+E3. Do the two transactions have the same transaction hash or are they different? Copy and paste
+the two transaction hashes into your single, well labeled pdf file.
+
+E4. Write a JavaScript program named ShowFirstThreeBalances.js. Place this program in the scripts directory. Run this program in its own command shell. In your single, well labeled pdf file, show the program itself
+as well as the output generated.
 
 ## Part B. Working with an ERC20 Token contract
 
