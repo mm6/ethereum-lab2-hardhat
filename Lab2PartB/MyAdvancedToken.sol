@@ -275,7 +275,7 @@ contract TokenERC20 {
         The approve call occurs prior to a transferFrom.
 
         Hardhat: Charlie approves Bob to spend 25 tokens.
-        await token.connect(Charlie).approve(bobAddr,'25000000000000000000');
+        tx = await token.connect(Charlie).approve(bobAddr,'25000000000000000000');
      */
 
     function approve(address _spender, uint256 _value) public
@@ -364,7 +364,7 @@ contract TokenERC20 {
         // Wait for the transaction to be confirmed and get back a receipt.
         const receipt = await tx.wait()
         // Display the logs array and view events that may have been triggered.
-        console.log(receipt.logs)
+        console.log(receipt.logs) or console.log(receipt.logs[0])
 
     */
 

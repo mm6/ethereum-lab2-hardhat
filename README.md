@@ -195,11 +195,11 @@ will need the receipt and the event name in the next question.
 E11. Exercise E10 should have generated an event. Show the three values of _owner, _spender, and _value values that are available. For this answer, you should submit the two hashes and a value. Check your receipt.logs[0].
 
 E12. Alice allows Charlie to spend 50 tokens on her behalf. Show the
-Hardhat console command(s) and the transaction receipt.
+Hardhat console command(s) and the transaction receipt. Your receipt.logs[0] should show an approval.
 
 E13. Show the command(s), that when executed in the Hardhat console, display the number of tokens that Alice has in her account. Use the balanceOf() method.
 
-E14. Bob sends 50 of Alice's tokens to Donna. Show the Hardhat console command(s) and the transaction receipt. Also, show Bob's Ethereum balance (not tokens) after he runs the transaction.
+E14. Bob sends 50 of Alice's tokens to Donna. Show the Hardhat console command(s) and the transaction receipt. Also, show Alice's token balance (not eth) after he runs the transaction.
 
 
 E15. Charlie sends 20 of Alice's tokens to Emily and burns the remaining tokens that Alice provided to Charlie. Show the Hardhat console command(s) and the transaction receipts.
