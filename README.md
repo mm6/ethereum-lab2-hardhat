@@ -68,7 +68,9 @@ E3. Do the two transactions have the same transaction hash or are they different
 E4. Using ListAndTransferBalances.js as a guide, write a new JavaScript program named ShowFirstThreeBalances.js. The program needs to be clean and well documented. Place this program in the scripts directory. Run this program in its own command shell. In your single, well labeled pdf file, show the program itself as well as the output generated. We will name the players Alice, Bob, and Carol. Your output will appear as follows:
 
 Alice balance: ALICE BALANCE HERE
+
 Bob balance: BOB BALANCE HERE
+
 Carol balance: CAROL BALANCE HERE
 
 E5. By examining the shell where the server is running, did the program in E4 generate new
