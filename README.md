@@ -71,6 +71,10 @@ Alice balance: ALICE BALANCE HERE
 Bob balance: BOB BALANCE HERE
 Carol balance: CAROL BALANCE HERE
 
+E5. By examining the shell where the server is running, did the program in E4 generate new
+transactions or not? Why? Answer these two questions and copy and paste your answers into your
+single, well labeled pdf file.
+
 
 ## Part B. Working with an ERC20 Token contract
 
