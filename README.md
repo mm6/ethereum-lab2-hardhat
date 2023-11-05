@@ -168,10 +168,9 @@ npx hardhat compile
 npx hardhat console
 ```
 
-13. For the ERC problems, it is highly recommended that you make a copy of each command
-before executing it. In this way, if you make a mistake, it is a simple matter to replay
-the old commands - with copy and paste.
+13. For the ERC problems, it is highly recommended that you make a copy of each command before executing it. Be sure to save these commands. In this way, if you make a mistake and have to return to the beginning, it is a simple matter to replay the old commands - with copy and paste.
 
+14. It is also recommended that you keep track of who owns what as you go.
 
 ERC20 Token Problems
 
