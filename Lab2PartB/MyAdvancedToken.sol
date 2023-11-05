@@ -531,9 +531,10 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // of the contract.
     // It allows the owner to set a sell price and a buy price in eth.
 
-    /* Suppose Alice wants to set the sell price at 2 eth and the buy price at 1 eth.
+    /* Suppose Alice wants to set the sell price at 1 eth and the buy price at 2 eth.
        In Hardhat:
-        await token.setPrices('2','1');
+        tx = await token.setPrices('1','2');
+        receipt = await tx.wait();
     */
 
     function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner public {
@@ -552,11 +553,12 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // Ethereum and is not the same as the contract's token account.
     // The buyPrice is expressed in ether and was established by the owner.
     // The buyer sends along a value that is expressed in wei.
+    // If Donna has eth and wants tokens, she will call buy and pay the buy price in eth.
     // The contract needs tokens to sell. So, lets assume that prior
     // to a buy call by Charlie, Alice performed the following two steps.
     // First, she assigns the variable 'contract' to the address
     // of the contract.
-    // contractAddr = '0xDDec5bf035cEf613dc3cb130B0aED7172e04a35d'
+    // contractAddr = token.target;
     // Second, she might mint 5 tokens for the contract.
     // In Hardhat:
     // await token.mintToken(contractAddr,'5000000000000000000');
@@ -577,7 +579,7 @@ contract MyAdvancedToken is owned, TokenERC20 {
      * await token.connect(Charlie).buy({ value: ethers.parseEther("2.0") });
      *
      * The function will compute amount = 2000000000000000000 / 4 producing the
-     * correct amount in the correct format.
+     * correct amount in the correct format. 2000000000000000000 / 4 = 500000000000000000.
     */
 
     function buy() payable public {
@@ -589,11 +591,12 @@ contract MyAdvancedToken is owned, TokenERC20 {
     // It is not marked as 'payable'. There needs to be ether
     // in the contract's account for it to be able to buy these
     // tokens from the caller.
-
-    // Suppose the caller wants to sell 1 token.
+    // If Donna has tokens and wants eth, she will call sell and, in return for her tokens, receive eth
+    // at the sell price.
+    // Suppose the caller wants to sell 1 token and the sell price is 2 eth per token.
     // The token's ether balance must be >= 1 * 2 = 2.
     // How do we check the contract's ether balance?
-
+    //
     // In Hardhat:
     // const contractBalance = await ethers.provider.getBalance(contractAddr);
     // contractBalance.toString()
@@ -604,7 +607,7 @@ contract MyAdvancedToken is owned, TokenERC20 {
     //                Tokens are deducted from sender's account.
     //                Ether is transferred from contract's ether account
     //                to sender's ether account.
-
+    //
     function sell(uint256 amount) public {
         address myAddress = address(this);
         require(myAddress.balance >= amount * sellPrice);

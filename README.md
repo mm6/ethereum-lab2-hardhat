@@ -168,7 +168,7 @@ npx hardhat compile
 npx hardhat console
 ```
 
-13. For the ERC problems, it is highly recommended that you make a copy of each command before executing it. Be sure to save these commands. In this way, if you make a mistake and have to return to the beginning, it is a simple matter to replay the old commands - with copy and paste.
+13. For the ERC problems, it is highly recommended that you make a copy of each command before executing it. Be sure to save these commands. In this way, if you make a mistake and have to return to the beginning, it is a simple matter to replay the old commands - with copy and paste. This is a big time saver. Many commands may be reused after making small modifications.
 
 14. It is also recommended that you keep track of who owns what as you go.
 
@@ -178,6 +178,14 @@ In the problems below, Alice, Bob, Charlie, Donna and Emily are associated
 with the first five accounts provided in Hardhat. Each begins with 10,000 ether in his or her account.
 Use ethers.getSigners(); to establish these names to accounts.
 
+In some questions, you are asked to show the receipt from a transaction. Here is a common pattern
+to get a receipt (and events in the logs).
+
+```
+        tx = await token.connect(SomePlayer).someOperation(someParameterList);
+        receipt = await tx.wait();
+        receipt.logs[0]
+```
 E7.  Alice has deployed an instance of the MyAdvancedToken contract to
  the blockchain. She gave it the name "Alice Coin" and the symbol AC and an initial
  supply of 1300 tokens.
@@ -185,7 +193,7 @@ E7.  Alice has deployed an instance of the MyAdvancedToken contract to
 
 E8. Show the command(s), that when executed in the Hardhat console, display the total supply of tokens. For this question you are required to access the totalSupply public variable.
 
-E9. Alice would like to know her balance in Ethereum. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance in wei and in eth. Note: this is not her token balance. We are looking for two answers here. One showing wei and one showing eth.
+E9. Alice would like to know her balance in eth. Show the Hardhat console command(s) that will retrieve and display her Ethereum balance in wei and in eth. Note: this is not her token balance. We are looking for two answers here. One showing wei and one showing eth.
 
 
 E10. Alice allows Bob to spend 100 tokens on her behalf. Show the Hardhat console command(s) and the transaction receipt. Also, show Alice's Ethereum balance (in eth) after she runs the transaction. Note, to view the transaction receipt, you will want to study the contract documentation on the burn function. You
@@ -225,23 +233,29 @@ E20. Bob attempts to send 10 tokens to Donna. Show the
 
 
 E21. Alice sends 100 tokens to the contract without increasing
- the totalSupply. She also sets the buy price to 1 ether and the
- sell price to 2 ether. Paste here the Hardhat console commands and the transaction receipts.
-
-E22. Show the command(s) to find and display the contract's ether balance (not the token balance).
-Also, show the ether balance.
-
-E23. Donna buys 50 ether worth of tokens. Show the
- Hardhat console command(s) and the transaction receipt.
-
-E24. Donna no longer enjoys her tokens and wants to sell as many as she can back to the contract. Show the command she uses to sell her tokens and show the returned receipt.
-
-E25. Alice wants to have her contract "live free". So, she turns over control of the contract to the contract itself. Show the command she uses to free her contract and show the returned receipt.
-
-E26. Alice decides that she wants to mint 5 additional tokens and give them to Bob (increasing the total supply of tokens by 5). Show the command that she would try to use and show any error that may result.
+ the totalSupply. Paste here the Hardhat console commands and the transaction receipts.
 
 
-E27. Find the token balance of each of our players:
+E22. Alice sets the sell price to 1 ether and the buy price to 2 ether.  Note if a player has eth and wants tokens, the player will call 'buy' and pay the buy price. If a player has tokens but wants eth, the player will call 'sell' and sell the tokens at the sell price. Paste here the Hardhat console commands and the transaction receipts.
+
+E23. Show the command(s) to find and display the contract's ether balance (not the token balance).
+Show the results in wei and in eth.
+
+E24. Show the commands to find and display Donna's token balance. Show the result.
+
+E25. Donna buys 50 ether worth of tokens. This is the first time that the contract will receive
+some cash of its own. Show the Hardhat console command(s) and the transaction receipt.
+
+E26. Show the values of Donna's token balance and the contract's token balance.
+
+E27. Donna no longer enjoys so many tokens and wants to sell 10 back to the contract. Show the Hardhat console command(s) and the transaction receipt. Note, you need to express '10' with 18 zeroes and as a string.
+
+E28. Alice wants to have her contract "live free". So, she turns over control of the contract to the contract itself. Show the command she uses to free her contract and show the returned receipt.
+
+E29. Alice decides that she wants to mint 5 additional tokens and give them to Bob (increasing the total supply of tokens by 5). Show the command that she would try to use and show any error that may result.
+
+
+E30. Find the token balance of each of our players:
 
     Alice _________
 
@@ -256,7 +270,7 @@ E27. Find the token balance of each of our players:
     contract ______
 
 
-E28. What is the ether balance of each of our players:
+E31. What is the ether balance of each of our players:
 
     Alice _________
 
