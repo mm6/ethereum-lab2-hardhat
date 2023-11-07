@@ -40,11 +40,11 @@
    const AliceWeiBalance = await ethers.provider.getBalance(aliceAddr);
    AliceWeiBalance
 
-   Parse a string holding eth to wei. The 'n' signifies a BigInt.
+   Parse a string holding eth to wei. The 'n' signifies a Javascript BigInt.
    wei = ethers.parseEther("1.0")
    1000000000000000000n
 
-   Create an string holding eth given wei as a BigInt.
+   Create a string holding eth given wei as a BigInt.
    ethString = ethers.formatEther(wei)
 
    Note on transactions:
@@ -295,13 +295,13 @@ contract TokenERC20 {
 
         Postcondition: Reduce how much more may be spent by this sender.
         Perform the actual transfer from the 'from' account to the 'to' account.
-        Bob pays Charlie from Alice's account. Alice issued a prior approval
+        Bob pays Donna from Alice's account. Alice issued a prior approval
         for Bob to spend. Bob initiates the transfer request.
 
         In Hardhat:
-            Bob sends 10 of Charlie's tokens to Donna.
+            Bob sends 10 of Alice's tokens to Donna.
 
-            await token.connect(Bob).transferFrom(charlieAddr,donnaAddr, '10000000000000000000');
+            await token.connect(Bob).transferFrom(aliceAddr,donnaAddr, '10000000000000000000');
 
     */
 
