@@ -1,4 +1,4 @@
-##  Fall 2023 Blockchain and SQL Fundamentals
+##  Fall 2023 Blockchain and SQL Fundamentals    Lab 2
 ### Carnegie Mellon University MSCF
 ### Due: Wednesday, November 22, 2023 11:59 PM
 ### 10 Points
@@ -6,16 +6,16 @@
 
 **Learning Objectives:**
 
-In Part A, we will work without a smart contract. We will start the Hardhat
+In Part A, we will work **without a smart contract**. We will start the Hardhat
 network in its own shell and interact with the shell via a Javascript program.
 Part 1 illustrates client server computing and a simple decentralized payment system.
 
-In Part B, we will work with an ERC20 token contract. ERC20 tokens are at the heart
+In Part B, we will work with an **ERC20 token contract**. ERC20 tokens are at the heart
 of many DeFi applications.
 
 **Deliverable:**
 
-Please compile your answers to questions E0 through EXX into a single PDF file named ‘Lab2.pdf’. Ensure that the file is well-organized and properly labeled. Submit this single PDF file to Canvas.
+Please compile your answers to questions E0 through E31 into a single PDF file named ‘Lab2.pdf’. Ensure that the file is well-organized and properly labeled. Submit this single PDF file to Canvas.
 
 ## Part A. Writing a client side program to interact with a Hardhat network running locally in its own shell.
 
@@ -284,172 +284,13 @@ E31. What is the ether balance of each of our players:
 
     contract ______    
 
-
-
-## Part C. Remix deployment and interaction with an ERC20 Token 5 Points
-
-
-In this Part, you will deploy the same MyAdvancedToken contract to Remix.
-
-Once deployed, you will need to answer the following questions by using
-Remix. Paste your solutions into Lab2PartC.pdf.
-
-
-Remix Problems
-:
-
-
-In the problems below, Alice, Bob, Charlie, Donna and Emily are associated
-with the five accounts as above.  Each has 10,0000 ether in their accounts.
-
-0. Alice deploys an instance of the MyAdvancedToken contract to
- Remix. She gives it the name "Alice Coin" and the symbol "AC" and an initial supply of 1300 tokens.  
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Alice's address.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt returned to the browser.
-
-
-1. Alice allows Bob to spend 100 tokens on her behalf.
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Bob's address.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs returned to the browser.
-
-2. Alice allows Charlie to spend 50 tokens on her behalf.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Charlie's address.
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
-
-3. Bob sends 50 of Alice's tokens to Donna.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Donna's address.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
-
-
-4. Charlie sends 20 of Alice's tokens to Emily and burns the
- remaining tokens that Alice provided to Charlie.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Emily's address.
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the first transaction receipt logs.
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the second transaction receipt logs.
-
-
-5. Emily sends 5 of her tokens to Bob.
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
-
-
-
-6. Bob sends his 5 tokens to Alice.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
-
-
-7. Bob returns his remaining allowance to Alice.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
-
-
-8. Bob attempts to send 10 tokens to Donna.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the error message.
-
-
-
-9. Alice sends 100 tokens to the contract without increasing
- the totalSupply. She also sets the buy price to 1 ether and the
- sell price to 2 ether.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the first transaction receipt logs.
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the second transaction receipt logs.
-
-
-10. Donna buys 50 ether worth of tokens.
-
-
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show the transaction receipt logs.
-
-
-11. Find the token balance of each of our players:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alice
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bob
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charlie
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Donna
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emily  
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contract  
-
-
-12. What is the ether balance (to two decimal digits) for:
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alice
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bob
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Charlie
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Donna
-
-13. Alice turns control of the contract to the contract itself. What is
-the transaction hash?
-
-
-14. What is the Elliptic curve private key of Alice?
-
-
-15. Public key cryptography often uses digital certificates. However,
-in this lab, we have made no use of digital certificates. Explain why. In your answer,
-be sure to say what digital certificates are normally used for and then explain why we do not
-need them here. (This requires a little research.)
-
-
-:checkered_flag:**To receive credit for Part C, submit your answers to the 16 questions above in a file named Lab2PartC.pdf. Each answer will be clearly labelled with the question number (0 through 15). Each answer will be nicely formatted and easy to read.**
-
-
-:checkered_flag:**Place your three submission documents (Lab2PartA.pdf and Lab2PartB.pdf and Lab2PartC.pdf) into a single directory and zip that directory. Name the zip file <your-andrew-id>Lab2.zip. Submit this single zip file to Canvas.**
-
-
-## Grading rubric for the materials in the submission directory
-One zip file named Lab2.zip will be submitted on Canvas for grading.
+## Grading rubric for Lab 2
+One pdf file named Lab2.pdf will be submitted on Canvas for grading.
 
 + 4 points for successful completion of Part A
 + 1 point for correct submission and clear labelings of Part A
-+ 9 points for successful completion of Part B
++ 4 points for successful completion of Part B
 + 1 point for correct submission and clear labelings of Part B
-+ 4 points for successful completion of Part C
-+ 1 point for correct submission and clear labelings of Part C
 
 Penalty for any late  work
 ==========================
