@@ -1,6 +1,6 @@
 ##  Fall 2023 Blockchain and SQL Fundamentals    Lab 2
 ### Carnegie Mellon University MSCF
-### Due: Wednesday, November 22, 2023 11:59 PM
+### Due: Wednesday, November 29, 2023 11:59 PM
 ### 10 Points
 ### Deliverable: A single .pdf file named Lab2.pdf with clearly labelled answers.
 
