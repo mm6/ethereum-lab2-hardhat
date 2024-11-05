@@ -1,6 +1,7 @@
-##  Developing Blockchain Use Cases Spring 2024 Lab 2
-### Carnegie Mellon University
-### Due: Monday, April 8, 2024 11:59 PM
+##  Fall 2024 Blockchain and SQL Fundamentals 46912, 95827 Lab 2
+### Carnegie Mellon University MSCF
+### Due to Canvas on Thursday, November 21, 2024 11:59 PM
+### Assigned Thursday, November 7, 2024
 ### 10 Points
 ### Deliverable: A single .pdf file named Lab2.pdf with clearly labelled answers.
 
@@ -10,8 +11,7 @@ In Part A, we will work **without a smart contract**. We will start the Hardhat
 network in its own shell and interact with the shell via a Javascript program.
 Part A illustrates client server computing and a simple decentralized payment system.
 
-In Part B, we will work with an **ERC20 token contract**. ERC20 tokens are at the heart
-of many DeFi applications.
+In Part B, we will work with an **ERC20 token contract**. ERC20 tokens are at the heart of many DeFi applications.
 
 **Deliverable:**
 
